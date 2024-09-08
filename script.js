@@ -2,8 +2,8 @@ const commentInput = document.getElementById("commentInput");
 const sendcomment = document.getElementById("sendcomment");
 const commentsContainer= document.getElementById("commentsContainer");
 
-sendcomment.addEventListener('click',' addComment');
-commentsContainer.addEventListener('click','handleCommentActions');
+sendcomment.addEventListener('click', addComment);
+commentsContainer.addEventListener('click',handleCommentActions);
 
 function addComment() {
     const content = commentInput.value.trim();
@@ -14,10 +14,12 @@ function addComment() {
     const comment = {
         id: Date.now(),
         content: content,
-        like: 0,
+        likes: 0,
     };
 
     saveComment(comment);
+    displayComment(comment);
+    commentInput.value = '';
 }
 
 function displayComment(comment) {
@@ -30,11 +32,11 @@ function displayComment(comment) {
             </div>
         </div>
     `;
-    commentsContainer.insertAdjacentHTML('afterbrgin', commentElement);
+    commentsContainer.insertAdjacentHTML('afterbegin', commentElement);
 }
 
 function saveComment(comment) {
-    const comments = getStoreComments();f
+    const comments = getStoredComments();
     comments.push(comment);
     localStorage.setItem('comments', JSON.stringify(comments));
 }
