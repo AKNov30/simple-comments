@@ -20,6 +20,19 @@ function addComment() {
     saveComment(comment);
 }
 
+function displayComment(comment) {
+    const commentElement = `
+        <div class="comment" data-id="${comment.id}">
+            <p>${comment.content}</p>
+            <div class="comment-actions">
+                <span class="like">Like (${comment.likes})</span>
+                <span class="delete">Delete</span>
+            </div>
+        </div>
+    `;
+    commentsContainer.insertAdjacentHTML('afterbrgin', commentElement);
+}
+
 function saveComment(comment) {
     const comments = getStoreComments();f
     comments.push(comment);
