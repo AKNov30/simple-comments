@@ -58,3 +58,27 @@ function handleCommentActions(event) {
         commentElement.remove();
     }
 }
+
+function updateCommentLikes(id) {
+    const comments = getStoredComments();
+    const commentIndex = comments.findIndex(comment => comment.id === id);
+    comments[commentIndex].likes += 1;
+
+    const likeElement = document.querySelector(`[data-id="${id}"] .like`);
+    likeElement.textContent = `Like (${comments[commentIndex].likes})`;
+
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+function deleteComment(id) {
+    let comments = getStoredComments();
+    comments = comments.filter(comment => comment.id !== id);
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+function loadComments() {
+    const comments = getStoredComments();
+    for (const comment of comments) {
+        displayComment(comment);
+    }
+}
