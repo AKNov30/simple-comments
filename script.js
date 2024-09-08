@@ -5,6 +5,8 @@ const commentsContainer= document.getElementById("commentsContainer");
 sendcomment.addEventListener('click', addComment);
 commentsContainer.addEventListener('click',handleCommentActions);
 
+window.addEventListener('DOMContentLoaded', loadComments);
+
 function addComment() {
     const content = commentInput.value.trim();
     if (content === '') {
